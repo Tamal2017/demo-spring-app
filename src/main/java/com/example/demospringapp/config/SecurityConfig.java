@@ -41,7 +41,7 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(
-                new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2A, 12)
+                new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2A, 10)
         );
         daoAuthenticationProvider.setUserDetailsService(myUserDetailsService);
 
