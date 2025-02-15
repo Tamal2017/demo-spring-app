@@ -1,7 +1,6 @@
 package com.example.demospringapp.controller;
 
 import com.example.demospringapp.model.MyUser;
-import com.example.demospringapp.repo.MyUserRepo;
 import com.example.demospringapp.service.MyUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -30,8 +29,13 @@ public class UserController {
         return myUserService.getUsers();
     }
 
-    @PostMapping("/users")
+    @PostMapping("/register")
     public MyUser addUser(@RequestBody MyUser myUser) {
         return myUserService.addUser(myUser);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody MyUser myUser) {
+        return myUserService.verify(myUser);
     }
 }
