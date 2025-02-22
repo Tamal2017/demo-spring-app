@@ -16,7 +16,7 @@ public class StudentContoller {
 
     private List<Student> students = new ArrayList<>(List.of(
             new Student(1, "John", "A+"),
-            new Student(1, "Joseph", "B-")
+            new Student(2, "Joseph", "B-")
     ));
 
     @GetMapping("/students")
@@ -31,6 +31,6 @@ public class StudentContoller {
 
     @DeleteMapping("/student/{id}")
     boolean deleteStudentById(@PathVariable("id") int id) {
-        return students.removeIf(student -> student.getId() == id);
+        return students.removeIf(student -> student.id() == id);
     }
 }
