@@ -14,10 +14,10 @@ import java.util.List;
 @Service
 public class MyUserService {
 
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
     private final MyUserRepo myUserRepo;
     private final JwtService jwtService;
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     public MyUserService(MyUserRepo myUserRepo, AuthenticationManager authenticationManager, JwtService jwtService) {
         this.myUserRepo = myUserRepo;
