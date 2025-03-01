@@ -1,6 +1,6 @@
 package com.example.demospringapp.service;
 
-import com.example.demospringapp.model.MyUser;
+import com.example.demospringapp.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -24,11 +24,11 @@ public class JwtService {
     @Value("${jwt.expiration.ms}")
     private int jwtExpirationMs;
 
-    public String generateJwtToken(MyUser myUser) {
+    public String generateJwtToken(User user) {
         Map<String, Object> clams = new HashMap<>();
         return Jwts.builder()
                 .claims(clams)
-                .subject(myUser.getUsername())
+                .subject(user.getUsername())
                 .issuedAt(new Date()).expiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(generateSigningKey(jwtSecret))
                 .compact();

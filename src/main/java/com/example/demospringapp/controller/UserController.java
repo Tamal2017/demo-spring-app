@@ -1,7 +1,7 @@
 package com.example.demospringapp.controller;
 
-import com.example.demospringapp.model.MyUser;
-import com.example.demospringapp.service.MyUserService;
+import com.example.demospringapp.model.User;
+import com.example.demospringapp.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +13,10 @@ import java.util.List;
 
 @RestController
 public class UserController {
-    private final MyUserService myUserService;
+    private final UserService userService;
 
-    public UserController(MyUserService myUserService) {
-        this.myUserService = myUserService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/csrf-token")
@@ -25,17 +25,17 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<MyUser> getUsers() {
-        return myUserService.getUsers();
+    public List<User> getUsers() {
+        return userService.getUsers();
     }
 
     @PostMapping("/register")
-    public MyUser addUser(@RequestBody MyUser myUser) {
-        return myUserService.addUser(myUser);
+    public User addUser(@RequestBody User user) {
+        return userService.addUser(user);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody MyUser myUser) {
-        return myUserService.verify(myUser);
+    public String login(@RequestBody User user) {
+        return userService.verify(user);
     }
 }

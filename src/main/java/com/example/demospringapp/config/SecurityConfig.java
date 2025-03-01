@@ -1,6 +1,6 @@
 package com.example.demospringapp.config;
 
-import com.example.demospringapp.service.MyUserDetailsService;
+import com.example.demospringapp.service.UserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,13 +20,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final String[] URL_WHITE_LIST = {"/", "/login"};
+    private final String[] URL_WHITE_LIST = {"/", "/login", "/register"};
 
-    MyUserDetailsService myUserDetailsService;
+    UserDetailsService userDetailsService;
     AuthenticationJwtTokenFilter authenticationJwtTokenFilter;
 
-    public SecurityConfig(MyUserDetailsService myUserDetailsService, AuthenticationJwtTokenFilter authenticationJwtTokenFilter) {
-        this.myUserDetailsService = myUserDetailsService;
+    public SecurityConfig(UserDetailsService userDetailsService, AuthenticationJwtTokenFilter authenticationJwtTokenFilter) {
+        this.userDetailsService = userDetailsService;
         this.authenticationJwtTokenFilter = authenticationJwtTokenFilter;
     }
 
@@ -51,7 +51,7 @@ public class SecurityConfig {
         daoAuthenticationProvider.setPasswordEncoder(
                 new BCryptPasswordEncoder(12)
         );
-        daoAuthenticationProvider.setUserDetailsService(myUserDetailsService);
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
 
         return daoAuthenticationProvider;
     }
