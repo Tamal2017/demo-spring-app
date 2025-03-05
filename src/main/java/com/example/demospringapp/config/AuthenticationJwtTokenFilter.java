@@ -1,7 +1,7 @@
 package com.example.demospringapp.config;
 
 import com.example.demospringapp.service.JwtService;
-import com.example.demospringapp.service.UserDetailsService;
+import com.example.demospringapp.service.UsersDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,11 +20,11 @@ import java.io.IOException;
 public class AuthenticationJwtTokenFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
+    private final UsersDetailsService usersDetailsService;
 
-    public AuthenticationJwtTokenFilter(JwtService jwtService, UserDetailsService userDetailsService) {
+    public AuthenticationJwtTokenFilter(JwtService jwtService, UsersDetailsService usersDetailsService) {
         this.jwtService = jwtService;
-        this.userDetailsService = userDetailsService;
+        this.usersDetailsService = usersDetailsService;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class AuthenticationJwtTokenFilter extends OncePerRequestFilter {
 
     private void addTokenToSecurityContext(HttpServletRequest request, final String username, final String token) {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = usersDetailsService.loadUserByUsername(username);
             if (jwtService.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

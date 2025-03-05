@@ -1,6 +1,6 @@
 package com.example.demospringapp.config;
 
-import com.example.demospringapp.service.UserDetailsService;
+import com.example.demospringapp.service.UsersDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,11 +22,11 @@ public class SecurityConfig {
 
     private final String[] URL_WHITE_LIST = {"/", "/login", "/register"};
 
-    UserDetailsService userDetailsService;
+    UsersDetailsService usersDetailsService;
     AuthenticationJwtTokenFilter authenticationJwtTokenFilter;
 
-    public SecurityConfig(UserDetailsService userDetailsService, AuthenticationJwtTokenFilter authenticationJwtTokenFilter) {
-        this.userDetailsService = userDetailsService;
+    public SecurityConfig(UsersDetailsService usersDetailsService, AuthenticationJwtTokenFilter authenticationJwtTokenFilter) {
+        this.usersDetailsService = usersDetailsService;
         this.authenticationJwtTokenFilter = authenticationJwtTokenFilter;
     }
 
@@ -51,7 +51,7 @@ public class SecurityConfig {
         daoAuthenticationProvider.setPasswordEncoder(
                 new BCryptPasswordEncoder(12)
         );
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        daoAuthenticationProvider.setUserDetailsService(usersDetailsService);
 
         return daoAuthenticationProvider;
     }
