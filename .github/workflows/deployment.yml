@@ -8,10 +8,16 @@ on:
     types: [created]
 
 jobs:
+
   integration:
     uses: ./.github/workflows/integration.yml
+    permissions:
+     contents: read
+     packages: write
+     
   build:
-
+    needs: [integration]
+    
     runs-on: ubuntu-latest
     permissions:
       contents: read
