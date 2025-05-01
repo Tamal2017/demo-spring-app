@@ -9,19 +9,16 @@
 name: Java CI with Maven
 
 on:
-  push:
+  push:  
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-#permissions:
-  #contents: read
+  workflow_call:
   
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    #permissions:
-      #checks: write
 
     steps:
     - uses: actions/checkout@v4
