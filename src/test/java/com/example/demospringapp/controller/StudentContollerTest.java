@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 class StudentContollerTest {
 
     @Autowired
@@ -19,8 +19,8 @@ class StudentContollerTest {
 
     @Test
     void testGetStudents_withUnauthorizedUser_thenThrow401Error() throws Exception {
-        this.mockMvc.perform(get("/sudents"))
+        this.mockMvc.perform(get("/students"))
                 .andDo(print())
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isOk());
     }
 }

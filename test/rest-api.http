@@ -1,7 +1,0 @@
-## Send post request with json body
- POST http://localhost:8081/login
- content-type: application/json
- {
-    "username": "Test",
-    "password": "login",
- }
