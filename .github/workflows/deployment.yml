@@ -14,7 +14,8 @@ jobs:
   integration:
     uses: ./.github/workflows/integration.yml
     permissions:
-      contents: read
+      actions: read
+      contents: write
       packages: write
      
   build:
