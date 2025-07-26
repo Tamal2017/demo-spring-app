@@ -2,15 +2,12 @@
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
 
 name: Maven Package
-
 on:
   workflow_dispatch:
-  
   release:
     types: [created]
 
 jobs:
-  
   integration:
     uses: ./.github/workflows/integration.yml
     permissions:
@@ -20,12 +17,10 @@ jobs:
      
   deploy:
     needs: [integration]
-    
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
