@@ -9,7 +9,7 @@ on:
 
 jobs:
   integration:
-    uses: ./.github/workflows/integration.yml
+    uses: ./.github/workflows/ci_java.yml
     permissions:
       actions: read
       contents: write
