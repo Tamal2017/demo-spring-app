@@ -34,7 +34,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+    - name: Publish to GitHub Packages Apache Mave
+      run: mvn -X deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/Tamal2017/demo-spring-app -s $GITHUB_WORKSPACE/settings.xml
       env:
-        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #GITHUB_TOKEN: ${{ github.token }}
