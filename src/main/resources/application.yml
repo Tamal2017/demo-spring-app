@@ -1,0 +1,19 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: demo-spring-app
+  security:
+    user:
+      name: user
+      password: admin
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    username: postgres
+    password: admin
+# JWT
+jwt:
+  secret: "4261656C6E672364261656C64756E61656C64756E6742FH0061656C64756E67F;"
+  expiration:
+    ms: 600000

@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final String[] URL_WHITE_LIST = {"/", "/login", "/register"};
+    private static final String[] URL_WHITE_LIST = {"/", "/login", "/register"};
 
     UsersDetailsService usersDetailsService;
     AuthenticationJwtTokenFilter authenticationJwtTokenFilter;
@@ -33,13 +33,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(URL_WHITE_LIST)
                         .permitAll()
                         .anyRequest()
                         .authenticated())
-                .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authenticationJwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
